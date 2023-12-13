@@ -10,7 +10,7 @@ int exit_fun(char **tokens, char *name)
 {
 	(void)tokens;
 	(void)name;
-	exit(EXIT_SUCCESS);
+	exit;
 }
 
 /**
