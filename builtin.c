@@ -100,7 +100,7 @@ int cd_fun(char **tokens, char *name)
 			if (chdir(h_d))
 			{
 				perror("chdir");
-				return (-1);
+				return (1);
 			}
 			else
 			{
@@ -114,7 +114,7 @@ int cd_fun(char **tokens, char *name)
 		if (!getcwd(c_d, sizeof(c_d)))
 		{
 			perror("getcwd");
-			return (-1);
+			return (1);
 		}
 		snprintf(f_p, sizeof(f_p), "%s/%s", c_d, tokens[1]);
 		chdir(f_p);
