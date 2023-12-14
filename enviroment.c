@@ -31,10 +31,9 @@ int unsetenv_fun(char **tokens, char *name)
     for (i = 0; i < num; i++, enviro++)
     {
         if (strncmp(*enviro, tokens[1], strlen(tokens[1])))
-        {
             new[i] = *enviro;
-            i++;
-        }
+        else
+            i--;
     }
     new[i] = NULL;
     environ = new;
