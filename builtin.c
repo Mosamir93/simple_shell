@@ -82,7 +82,7 @@ char **split(char *s)
 
 int cd_fun(char **tokens, char *name)
 {
-	char *h_d = NULL, c_d[PATH_MAX], f_p[2 * PATH_MAX];
+	char *h_d = NULL, c_d[PATH_MAX], f_p[2 + PATH_MAX];
 	char **enviro = environ;
 
 	if (tokens[1] == NULL)
