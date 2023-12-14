@@ -10,7 +10,7 @@ int exit_fun(char **tokens, char *name)
 {
 	(void)tokens;
 	(void)name;
-	return(0);
+	return (0);
 }
 
 /**
@@ -82,7 +82,7 @@ char **split(char *s)
 
 int cd_fun(char **tokens, char *name)
 {
-	char *h_d = NULL, c_d[PATH_MAX], f_p[2 + PATH_MAX];
+	char *h_d = NULL;
 	char **enviro = environ;
 
 	if (tokens[1] == NULL)
@@ -100,24 +100,23 @@ int cd_fun(char **tokens, char *name)
 			if (chdir(h_d))
 			{
 				perror("chdir");
-				return (1);
-			}
-			else
-			{
-				fprintf(stderr, "%s: No such file or directory\n", name);
 				return (-1);
 			}
+		}
+		else
+		{
+			fprintf(stderr, "%s: No such file or directory\n", name);
+			return (-1);
 		}
 	}
 	else
 	{
-		if (!getcwd(c_d, sizeof(c_d)))
+		if (chdir(tokens[1]))
 		{
-			perror("getcwd");
-			return (1);
+			perror("chdir");
+			return (-1);
 		}
-		snprintf(f_p, sizeof(f_p), "%s/%s", c_d, tokens[1]);
-		chdir(f_p);
 	}
-	return (-1);
+
+	return (0);
 }
