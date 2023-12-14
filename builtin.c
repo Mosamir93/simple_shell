@@ -6,6 +6,7 @@
  * @name: name of the program
  * Return: nothing because it exits
  */
+
 int exit_fun(char **tokens, char *name)
 {
 	(void)tokens;
@@ -19,6 +20,7 @@ int exit_fun(char **tokens, char *name)
  * @name: name of the program
  * Return: -1 on success
  */
+
 int env_fun(char **tokens, char *name)
 {
 	char **enviro;
@@ -72,7 +74,6 @@ char **split(char *s)
 	return (words);
 }
 
-
 /**
  * cd_fun - changes directory and gets the full path of the directory
  * @tokens: array of strings obtained from stdin
@@ -82,7 +83,7 @@ char **split(char *s)
 
 int cd_fun(char **tokens, char *name)
 {
-	char *h_d = NULL;
+	char *h_d = NULL, c_d[PATH_MAX], f_p[2 + PATH_MAX];
 	char **enviro = environ;
 
 	if (tokens[1] == NULL)
@@ -102,21 +103,22 @@ int cd_fun(char **tokens, char *name)
 				perror("chdir");
 				return (-1);
 			}
-		}
-		else
-		{
-			fprintf(stderr, "%s: No such file or directory\n", name);
-			return (-1);
+			else
+			{
+				fprintf(stderr, "%s: No such file or directory\n", name);
+				return (-1);
+			}
 		}
 	}
 	else
 	{
-		if (chdir(tokens[1]))
+		if (!getcwd(c_d, sizeof(c_d)))
 		{
-			perror("chdir");
+			perror("getcwd");
 			return (-1);
 		}
+		snprintf(f_p, sizeof(f_p), "%s/%s", c_d, tokens[1]);
+		chdir(f_p);
 	}
-
-	return (0);
+	return (-1);
 }
