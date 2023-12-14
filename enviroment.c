@@ -21,7 +21,7 @@ int unsetenv_fun(char **tokens, char *name)
 	enviro = environ;
 	for (num = 0; *enviro; num++, enviro++)
 		;
-	new = malloc((num + 1) * sizeof(char *));
+	new = malloc((num) * sizeof(char *));
 	if (new == NULL)
 	{
 		perror("Error in memory allocation");
@@ -77,6 +77,11 @@ int setenv_fun(char **tokens, char *name)
 	len1 = strlen(tokens[1]);
 	len2 = strlen(tokens[2]);
 	new[i] = malloc(len1 + len2 + 2);
+	if (new[i] == NULL)
+	{
+		perror("Error in memory allocation");
+		exit(EXIT_FAILURE);
+	}
 	snprintf(new[i], (len1 + len2 + 2), "%s=%s", tokens[1], tokens[2]);
 	new[++i] = NULL;
 	environ = new;
