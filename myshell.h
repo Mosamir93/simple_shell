@@ -21,7 +21,7 @@ char *path_check(char **words, char *prog);
 int exit_fun(char **words, char *name);
 int env_fun(char **words, char *name);
 int cd_fun(char **words, char *name);
-int unsetenv_fun(char **tokens, char *name);
-int setenv_fun(char **tokens, char *name);
+int unsetenv_fun(char **words, char *name);
+int setenv_fun(char **words, char *name);
 
 #endif

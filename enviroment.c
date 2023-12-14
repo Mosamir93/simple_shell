@@ -9,7 +9,8 @@
 
 int unsetenv_fun(char **tokens, char *name)
 {
-    char **enviro, ***new;
+    char **enviro;
+    char **new;
     int i, num;
 
     if (!tokens[1] || tokens[2])
@@ -50,7 +51,8 @@ int unsetenv_fun(char **tokens, char *name)
 
 int setenv_fun(char **tokens, char *name)
 {
-    char **enviro, ***new;
+    char **enviro;
+    char **new;
     int i, num, len1, len2;
 
     if (!tokens[1] || !tokens[2] || tokens[3])
@@ -75,9 +77,9 @@ int setenv_fun(char **tokens, char *name)
     len1 = strlen(tokens[1]);
     len2 = strlen(tokens[2]);
     new[i] = malloc(len1 + len2 + 2);
-    snprintf(new[i], len1, len2 + 2, "%s=%s", tokens[1], tokens[2]);
+    snprintf(new[i], len1 + len2 + 2, "%s=%s", tokens[1], tokens[2]);
     new[++i] = NULL;
-    environ = *new;
+    environ = new;
     free(new);
     return (-1);
 }
